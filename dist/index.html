@@ -1,23 +1,158 @@
 <!DOCTYPE html>
 <html lang="de">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!----------------->
-    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous"> -->
-    <!-- <script src="https://kit.fontawesome.com/0cdb32a76e.js" crossorigin="anonymous"></script> -->
-    <!-- <script src="http://cdn.date-fns.org/v1.9.0/date_fns.min.js"></script> -->
-    <!----------------->
-    <link rel="stylesheet" href="style.css">
-    <title id="title">My Page</title>
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/style-login.css">
+    <link rel="stylesheet" href="styles/header.css">
+    <link rel="stylesheet" href="styles/style-userstats.css">
+    <link rel="stylesheet" href="styles/style-statistic.css">
+    <script src="https://kit.fontawesome.com/0cdb32a76e.js" crossorigin="anonymous"></script>
+    <title>TrainingTacker</title>
 </head>
+
 <body>
-   <h1>My Page</h1>
+    <section class="login background">
+        <div class="foreground">
+            <h2>Login</h2>
+            <form class="login">
+                <label for="NameLogin">Dein Name:</label>
+                <input type="text" id="NameLogin" placeholder="Name" required>
+                <label for="PasswortLogin">Dein Passwort:</label>
+                <input type="password" id="PasswortLogin" placeholder="Passwort" required>
+                <input type="submit" value="Login">
+            </form>
+            <p class="link" id="linkLogin">create account</p>
+        </div>
+    </section>
+
+    <section class="register background">
+        <div class="foreground">
+            <h2>Register</h2>
+            <form class="register">
+                <label for="NameRegister">Dein Name:</label>
+                <input type="text" id="NameRegister" placeholder="Name" required>
+                <label for="PasswortRegister">Dein Passwort:</label>
+                <input type="password" id="PasswortRegister" placeholder="Passwort" required>
+                <input type="submit" value="Register">
+            </form>
+            <p class="link" id="linkRegister">Login</p>
+        </div>
+    </section>
+
+    <header>
+        <div class="header">
+            <h1 class="title">TrainingsTracker</h1><br>
+            <p class="subtitle">Chalange</p>
+    
+            <div class="container"></div>
+    
+            <div class="circle">
+                <i class="fa-solid fa-bars"></i>
+    
+                <div class="click-area"></div>
+                <div class="userMenu" id="userMenu">
+                    <div class="selection"  id="logout">
+                        <i class="fa-solid fa-right-from-bracket icon"></i>
+                        <p class="userMenu">logout</p>
+                    </div>
+                    <div class="selection" id="settings">
+                        <i class="fa-solid fa-user-gear icon"></i>
+                        <p class="userMenu">Einstellungen</p> 
+                    </div>
+                </div>
+    
+            </div>
+            
+        </div>
+    </header>
+    
+    <main>
+        <section class="userStats">
+            <div class="user ">
+                <div class="profile"></div>
+                <div class="stats">
+                    <div class="image-container"><img src="data/Icon-pushup.jpg" alt=""></div>
+                    <div class="image-container"><img src="data/Icon-upllup.jpg" alt=""></div>
+                    <div class="image-container"><img src="data/Icon-situp.jpg" alt=""></div>
+                </div>
+            </div>
+
+            <div class="user winning">
+                <div class="profile">
+                    <div class="image-container winning">
+                        <img src="data/WIN_20250118_11_30_15_Pro.jpg" alt="">
+                    </div>
+                    <p>Name</p>
+                </div>
+                <div class="stats">
+                    <p>1000</p>
+                    <p>1000</p>
+                    <p>1000</p>
+                </div>
+            </div>
+
+            <div class="user losing">
+                <div class="profile">
+                    <div class="image-container losing">
+                        <img src="data/WIN_20250118_11_30_15_Pro.jpg" alt="">
+                    </div>
+                    <p>Name</p>
+                </div>
+                <div class="stats">
+                    <p>1000</p>
+                    <p>1000</p>
+                    <p>1000</p>
+                </div>
+            </div>
+            
+            <div class="add-exercise">
+                <form action="" class="add-exercise">
+                    <div class="add"><label for="pushup">Push-Ups:</label><input type="number" placeholder="Push-Ups" id="pushup"></div>
+                    <div class="add"><label for="pullup">Pull-Ups:</label><input type="number" placeholder="Pull-Ups" id="pullup"></div>
+                    <div class="add"><label for="situp">Sit-Ups:</label><input type="number" placeholder="Sit-Ups" id="situp"></div>
+                    <input type="submit" value="+">
+                </form>
+            </div>
+            <br>
+        </section>
+            
+
+        <section class="statistic">
+            <div class="auswahl">
+                <span>Einzelne Übung</span>
+                <span>Jede Übung</span>
+                <span>Custom</span>
+            </div>
+            <div class="container">
+                <div class="auswahl">
+                    <div class="zeitraum">
+                        <span class="selected">Woche</span>
+                        <span>Monat</span>
+                        <span>Max</span>
+                    </div>
+                    <div class="exercise">
+                        <input type="checkbox" id="pushup2"><label for="pushup2">Push-Ups</label><br>
+                        <input type="checkbox" id="pullup2"><label for="pullup2">Push-Ups</label><br>
+                        <input type="checkbox" id="situp2"><label for="situp2">Push-Ups</label><br>
+                    </div>
+                </div>
+                
+                <div class="statistic">
+
+                </div>
+            </div>
+        </section>
 
 
 
 
-   <script src="assets/bundle.js"></script>
+
+
+        <br><br><br><br><br>
+    </main>
+    <script src="main.js" type="module"></script>
+    <script src="db.js" type="module"></script>
 </body>
 </html>
