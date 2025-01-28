@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunktrainingstagebuch=self.webpackChunktrainingstagebuch||[]).push([[778],{778:(e,s,a)=>{a.r(s)}}]);
