@@ -1,18 +1,10 @@
 <!DOCTYPE html>
 <html lang="de">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <!-- <link rel="stylesheet" href="styles/style-login.css">
-    <link rel="stylesheet" href="styles/header.css">
-    <link rel="stylesheet" href="styles/style-userstats.css">
-    <link rel="stylesheet" href="styles/style-statistic.css"> -->
-    <script src="https://kit.fontawesome.com/0cdb32a76e.js" crossorigin="anonymous"></script>
-    <title>TrainingTacker</title>
-</head>
+<%- include('./partials/head.ejs') %>
 
 <body>
+    <%- include('./partials/header.ejs') %>
+
     <section class="login background">
         <div class="foreground">
             <h2>Login</h2>
@@ -41,32 +33,6 @@
         </div>
     </section>
 
-    <header>
-        <div class="header">
-            <h1 class="title">TrainingsTracker</h1><br>
-            <p class="subtitle">Chalange</p>
-    
-            <div class="container"></div>
-    
-            <div class="circle">
-                <i class="fa-solid fa-bars"></i>
-    
-                <div class="click-area"></div>
-                <div class="userMenu" id="userMenu">
-                    <div class="selection"  id="logout">
-                        <i class="fa-solid fa-right-from-bracket icon"></i>
-                        <p class="userMenu">logout</p>
-                    </div>
-                    <div class="selection" id="settings">
-                        <i class="fa-solid fa-user-gear icon"></i>
-                        <p class="userMenu">Einstellungen</p> 
-                    </div>
-                </div>
-    
-            </div>
-            
-        </div>
-    </header>
     
     <main>
         <section class="userStats">
@@ -152,6 +118,7 @@
 
         <br><br><br><br><br>
     </main>
-    <script src="assets/bundle.js"></script>
+    
+    <%- include('./partials/footer.ejs') %>
 </body>
 </html>
