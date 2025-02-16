@@ -1,5 +1,8 @@
 const express = require('express');
-const Datenbank = require('./datenbank');
+const routes = require('../../routes/routes')
+const apiRoutes = require('../../routes/apiRouts')
+
+const Datenbank = require('../../models/datenbank');
 db = new Datenbank();
 let user;
 
@@ -9,15 +12,15 @@ const server = app.listen(3000);
 
 app.set('view engine', 'ejs');
 app.use(express.static('public'));
+app.use(express.json());
 
 
-app.get('/', (req, res) => {
-    res.render('index');
-});
-
+app.use('/', routes);
+app.use('/api', apiRoutes);
 app.use((req, res) => {
     res.status(404).render('404');
 });
+
 
 
 // db.getWorkoutsByUserId(1).then((result, fields) => {
@@ -29,7 +32,7 @@ app.use((req, res) => {
 //     console.log(err);
 // });
 
-// db.createAccount(db.createUser('12345', 'test2@gmail.com', 'Test2', 'test', 'test')).then((result) => {
+// db.createAccount(db.createUser('12345', 'test4@gmail.com', 'Test4', 'test', 'test')).then((result) => {
 //     console.log(result);
 // }).catch(err => {
 //     console.log(err);

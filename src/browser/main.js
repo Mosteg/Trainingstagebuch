@@ -1,6 +1,4 @@
-import Login from "./login.js";
-const login = new Login();
+import userAuthentication from "./userAuth ";
+const userAuth = new userAuthentication();
 
-
-login.login();
-
+userAuth.login();

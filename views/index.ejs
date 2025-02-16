@@ -9,12 +9,13 @@
         <div class="foreground">
             <h2>Login</h2>
             <form class="login">
-                <label for="NameLogin">Dein Name:</label>
-                <input type="text" id="NameLogin" placeholder="Name" required>
+                <label for="NameLogin">Dein Nutzername:</label>
+                <input type="text" id="NameLogin" placeholder="Nutzername" required>
                 <label for="PasswortLogin">Dein Passwort:</label>
                 <input type="password" id="PasswortLogin" placeholder="Passwort" required>
                 <input type="submit" value="Login">
             </form>
+            <p class="errorUserAuth" id="errorLogin">fehler</p>
             <p class="link" id="linkLogin">create account</p>
         </div>
     </section>
@@ -23,12 +24,21 @@
         <div class="foreground">
             <h2>Register</h2>
             <form class="register">
-                <label for="NameRegister">Dein Name:</label>
-                <input type="text" id="NameRegister" placeholder="Name" required>
-                <label for="PasswortRegister">Dein Passwort:</label>
+                <label for="VornameRegister">Vorname:</label>
+                <input type="text" id="VornameRegister" placeholder="Vorname" required>
+                <label for="NachnameRegister">Nachname:</label>
+                <input type="text" id="NachnameRegister" placeholder="Nachname" required>
+                <label for="UsernameRegister">Username:</label>
+                <input type="text" id="UsernameRegister" placeholder="Username" required>
+                <label for="EmailRegister">Email:</label>
+                <input type="text" id="EmailRegister" placeholder="Email" required>
+                <label for="PasswortRegister">Passwort:</label>
                 <input type="password" id="PasswortRegister" placeholder="Passwort" required>
+                <label for="Passwort2Register">Passwort wiederholen:</label>
+                <input type="password" id="Passwort2Register" placeholder="Passwort wiederholen" required>
                 <input type="submit" value="Register">
             </form>
+            <p class="errorUserAuth" id="errorRegister">fehler</p>
             <p class="link" id="linkRegister">Login</p>
         </div>
     </section>
@@ -39,9 +49,9 @@
             <div class="user ">
                 <div class="profile"></div>
                 <div class="stats">
-                    <div class="image-container"><img src="data/Icon-pushup.jpg" alt=""></div>
-                    <div class="image-container"><img src="data/Icon-upllup.jpg" alt=""></div>
-                    <div class="image-container"><img src="data/Icon-situp.jpg" alt=""></div>
+                    <div class="image-container"><img src="/data/Icon-pushup.jpg" alt=""></div>
+                    <div class="image-container"><img src="/data/Icon-upllup.jpg" alt=""></div>
+                    <div class="image-container"><img src="/data/Icon-situp.jpg" alt=""></div>
                 </div>
             </div>
 

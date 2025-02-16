@@ -1,9 +1,20 @@
+.errorUserAuth {
+    visibility: hidden;
+    position: fixed;
+
+    color: crimson;
+}
+.errorUserAuthShow {
+    visibility: inherit;
+    position: static;
+}
 section.login {
     visibility: hidden;
 }
 section.register {
     visibility: hidden;
 }
+
 
 section.background {
     position: fixed;
