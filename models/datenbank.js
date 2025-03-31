@@ -4,21 +4,14 @@ const bcrypt = require('bcryptjs');
 class Datenbank {
     constructor() {
         this.pool = mysql.createPool({
-            host: "localhost",
-            user: "root",
-            password: "20_Nuka_19",
-            database: "trainingstagebuch",
+            host: process.env.DB_HOST,
+            user: process.env.DB_USER,
+            password: process.env.DB_PASSWORD,
+            database: process.env.DB_NAME,
             waitForConnections: true,
             connectionLimit: 5,
             queueLimit: 0,
         });
-    }
-
-    user(id, password, email, user_name, first_name, last_name, created_at) {
-        return {id, password, email, user_name, first_name, last_name, created_at};
-    }
-    createUser(password, email, user_name, first_name, last_name) {
-        return {password, email, user_name, first_name, last_name};
     }
 
     async getUserByEmail(email, password) {
@@ -53,43 +46,27 @@ class Datenbank {
         }
     };
 
-    async #getUserById(id) {
+    async getUserById(id) {
         try {
             const sql = 'select * from users where id = ?';
             const [rows] = await this.pool.execute(sql, [id]);
 
-            if(rows.length === 0) return null;
+            if(rows.length === 0) return new Error('User not found');
 
             return rows[0];
         }
         catch(error) {
             throw error;
         }
-    }
-
-    async getWorkoutsByUserId(id) {
-        try {
-            const sql = 
-                "select w.id as workoutID, timestamp, repetitions, e.name as exercises, description, e.id as exerciseId " +
-                "from workouts w " +
-                "join workout_exercises we on w.id = we.workout_id " +
-                "join exercises e on e.id = we.exercise_id " +
-                "where w.user_id = ?";
-            return (await this.pool.execute(sql, [id]))[0];
-        }
-        catch(error) {
-            throw error;
-        }
-        
-    }
-
+    } 
+    
     async createAccount(user) {
         try {
-            user.password = await bcrypt.hash(user.password, 10);
+            user.password = await bcrypt.hash(user.password, 14);
             const sql = 'insert into users set ?';
             const [result] = await this.pool.query(sql, user);
 
-            return await this.#getUserById(result.insertId);
+            return await this.getUserById(result.insertId);
 
         }
         catch(error) {
@@ -105,6 +82,101 @@ class Datenbank {
                 console.log(error);
                 throw new dbError('Unknown db error', 500);  
             }
+        }
+    }
+
+    async getWorkoutsByUserId(id) {
+        try {
+            const sql = 
+                'select workout_id, timestamp, notes, repetitions, exercise_id ' +
+                'from workouts w ' +
+                'join workout_exercises we on w.id = we.workout_id ' +
+                'where w.user_id = ? ' +
+                'order by w.id';
+            return (await this.pool.query(sql, [id]))[0];
+        }
+        catch(error) {
+            return error;
+        } 
+    }
+
+    async getChallengeDataByUserId(id, timeframe) {
+        let sqlSnippet;
+        switch(timeframe) {
+            case 'thisWeek': sqlSnippet = 'and YEARWEEK(w.timestamp, 1) = YEARWEEK(CURDATE(), 1) '; break
+            case 'week': sqlSnippet = 'and now() - interval 1 week < w.timestamp '; break;
+            case 'month': sqlSnippet = 'and now() - interval 1 month < w.timestamp '; break;
+            case 'year': sqlSnippet = 'and now() - interval 1 year < w.timestamp '; break;
+            case 'start': sqlSnippet = 'and c.created_at < w.timestamp '; break;
+            case 'every': sqlSnippet = ''; break;
+            default: sqlSnippet = 'and now() - interval 7 day < w.timestamp '; break;
+        }
+
+        try {
+            const sql = 
+                'select \'exercise Ids:\'  as id, exercise1_id as exercise1, exercise2_id as exercise2, exercise3_id as exercise3 from challenges c ' +
+                'inner join users u on u.challenge_id = c.id ' +
+                'where u.id = ? ' +
+                'union ' +
+                'select u.id, sum(CASE WHEN exercise_id = c.exercise1_id THEN repetitions END), sum(CASE WHEN exercise_id = c.exercise2_id THEN repetitions END), sum(CASE WHEN exercise_id = c.exercise3_id THEN repetitions END) ' +
+                'from users u ' +
+                'inner join challenges c on u.challenge_id = c.id ' +
+                'inner join workouts w on u.id = w.user_id ' +
+                'inner join workout_exercises we on w.id = we.workout_id ' +
+                'where u.challenge_id = (select challenge_id from users where id = ?) ' +
+                'and we.exercise_id in (c.exercise1_id, c.exercise2_id, c.exercise3_id) ' +
+                sqlSnippet +
+                'group by u.id;';
+            return (await this.pool.query(sql, [id, id]))[0];
+        }
+        catch(error) {
+            return error;
+        }
+    }
+
+    async createWorkoutWithUserId(id, notes = '') {
+        try {
+            const sql = 
+                'insert into workouts (user_id, notes) ' +
+                'values (?, ?)';
+            return await this.pool.query(sql, [id, notes]);
+        }
+        catch(error) {
+            throw error;
+        }
+    }
+
+    async addExercisesToWorkoutWithId(workout_id, exercises) {
+        let data = exercises.map(exercise => [workout_id, ...exercise]);
+        try {
+            const sql = 
+                'insert into workout_exercises (workout_id, exercise_id, repetitions) ' +
+                'values ?';
+            return await this.pool.query(sql, [data]);
+        }
+        catch(error) {
+            throw error;
+        }
+    }
+
+    async createExercise(name, description) {
+        try {
+            const sql = 
+                'insert into exercises set ?';
+            return await this.pool.query(sql, {name, description});
+        }
+        catch(error) {
+            throw error;
+        }
+    }
+
+    async getExercisesList() {
+        try {
+            const sql = 'select * from exercises';
+            return await this.pool.query(sql);
+        }
+        catch(error) {
+            throw error;
         }
     }
 

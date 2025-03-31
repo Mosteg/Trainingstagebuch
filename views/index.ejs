@@ -1,51 +1,12 @@
-<!DOCTYPE html>
-<html lang="de">
 <%- include('./partials/head.ejs') %>
 
 <body>
     <%- include('./partials/header.ejs') %>
-
-    <section class="login background">
-        <div class="foreground">
-            <h2>Login</h2>
-            <form class="login">
-                <label for="NameLogin">Dein Nutzername:</label>
-                <input type="text" id="NameLogin" placeholder="Nutzername" required>
-                <label for="PasswortLogin">Dein Passwort:</label>
-                <input type="password" id="PasswortLogin" placeholder="Passwort" required>
-                <input type="submit" value="Login">
-            </form>
-            <p class="errorUserAuth" id="errorLogin">fehler</p>
-            <p class="link" id="linkLogin">create account</p>
-        </div>
-    </section>
-
-    <section class="register background">
-        <div class="foreground">
-            <h2>Register</h2>
-            <form class="register">
-                <label for="VornameRegister">Vorname:</label>
-                <input type="text" id="VornameRegister" placeholder="Vorname" required>
-                <label for="NachnameRegister">Nachname:</label>
-                <input type="text" id="NachnameRegister" placeholder="Nachname" required>
-                <label for="UsernameRegister">Username:</label>
-                <input type="text" id="UsernameRegister" placeholder="Username" required>
-                <label for="EmailRegister">Email:</label>
-                <input type="text" id="EmailRegister" placeholder="Email" required>
-                <label for="PasswortRegister">Passwort:</label>
-                <input type="password" id="PasswortRegister" placeholder="Passwort" required>
-                <label for="Passwort2Register">Passwort wiederholen:</label>
-                <input type="password" id="Passwort2Register" placeholder="Passwort wiederholen" required>
-                <input type="submit" value="Register">
-            </form>
-            <p class="errorUserAuth" id="errorRegister">fehler</p>
-            <p class="link" id="linkRegister">Login</p>
-        </div>
-    </section>
-
+    <%- include('./partials/userAuth.ejs') %>
     
     <main>
         <section class="userStats">
+            <!-- header für workout symbole
             <div class="user ">
                 <div class="profile"></div>
                 <div class="stats">
@@ -55,43 +16,46 @@
                 </div>
             </div>
 
-            <div class="user winning">
-                <div class="profile">
-                    <div class="image-container winning">
-                        <img src="data/WIN_20250118_11_30_15_Pro.jpg" alt="">
+            hier werden die User hinzugefügt
+            <div id="userDisplay">
+                <div class="user winning">
+                    <div class="profile">
+                        <div class="image-container winning">
+                            <img src="data/WIN_20250118_11_30_15_Pro.jpg" alt="">
+                        </div>
+                        <p>Name</p>
                     </div>
-                    <p>Name</p>
+                    <div class="stats">
+                        <p>0</p>
+                        <p>0</p>
+                        <p>0</p>
+                    </div>
                 </div>
-                <div class="stats">
-                    <p>1000</p>
-                    <p>1000</p>
-                    <p>1000</p>
-                </div>
-            </div>
 
-            <div class="user losing">
-                <div class="profile">
-                    <div class="image-container losing">
-                        <img src="data/WIN_20250118_11_30_15_Pro.jpg" alt="">
+                <div class="user losing">
+                    <div class="profile">
+                        <div class="image-container losing">
+                            <img src="data/WIN_20250118_11_30_15_Pro.jpg" alt="">
+                        </div>
+                        <p>Name</p>
                     </div>
-                    <p>Name</p>
-                </div>
-                <div class="stats">
-                    <p>1000</p>
-                    <p>1000</p>
-                    <p>1000</p>
+                    <div class="stats">
+                        <p>0</p>
+                        <p>0</p>
+                        <p>0</p>
+                    </div>
                 </div>
             </div>
             
-            <div class="add-exercise">
-                <form action="" class="add-exercise">
-                    <div class="add"><label for="pushup">Push-Ups:</label><input type="number" placeholder="Push-Ups" id="pushup"></div>
-                    <div class="add"><label for="pullup">Pull-Ups:</label><input type="number" placeholder="Pull-Ups" id="pullup"></div>
-                    <div class="add"><label for="situp">Sit-Ups:</label><input type="number" placeholder="Sit-Ups" id="situp"></div>
+            
+            <div class="add-workout">
+                <form class="add-workout">
+                    <div class="add"><label for="22">Push-Ups:</label><input type="number" placeholder="Push-Ups" id="22" name="Push-Ups"></div>
+                    <div class="add"><label for="23">Pull-Ups:</label><input type="number" placeholder="Pull-Ups" id="23" name="Pull-Ups"></div>
+                    <div class="add"><label for="27">Sit-Ups:</label><input type="number" placeholder="Sit-Ups" id="27" name="Sit-Ups"></div>
                     <input type="submit" value="+">
                 </form>
-            </div>
-            <br>
+            </div> -->
         </section>
             
 
@@ -116,19 +80,12 @@
                 </div>
                 
                 <div class="statistic">
+                <canvas class="statistic"></canvas>
 
                 </div>
             </div>
         </section>
-
-
-
-
-
-
-        <br><br><br><br><br>
     </main>
-    
     <%- include('./partials/footer.ejs') %>
 </body>
 </html>

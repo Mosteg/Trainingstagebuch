@@ -33,10 +33,17 @@ module.exports = {
             use: [/*'style-loader'*/ MiniCssExtractPlugin.loader, 'css-loader']
         }]
     },
+    // optimization: {
+    //     splitChunks: {
+    //         chunks: 'all' // Teilt gemeinsam genutzten Code automatisch ab
+    //     }
+    // },
     plugins: [
         new MiniCssExtractPlugin({
             filename: '[name].css',
             chunkFilename: '[id].css',
         }),
-    ]
+    ],
+    target: 'node',
+    
 };

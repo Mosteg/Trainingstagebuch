@@ -52,18 +52,23 @@ div.stats img {
     height: 100%;
 }
 
-div.user.winning {
-    border: 2px solid green;
-    border-radius: 15px;
-    background-color: rgba(0, 128, 0, 0.3);
-}
 div.user.losing {
     border: 2px solid crimson;
     border-radius: 15px;
     background-color: rgba(220, 20, 60, 0.3);
 }
+div.user.winning {
+    border: 2px solid green;
+    border-radius: 15px;
+    background-color: rgba(0, 128, 0, 0.3);
+}
+div.user.equal {
+    border: 2px solid orange;
+    border-radius: 15px;
+    background-color: rgb(255, 165, 0, 0.3);
+}
 
-div.add-exercise {
+div.add-workout {
     /* width: 100%;
     height: calc(clamp(20px, 5vw, 100px) + clamp(10px, 2vw, 30px) + 20px);
     background-color: rgba(128, 128, 128, 0.3);
@@ -71,7 +76,7 @@ div.add-exercise {
     border: 2px solid black;
     box-sizing: border-box; */
 }
-form.add-exercise {
+form.add-workout {
     display: flex;
 
 }
@@ -80,7 +85,7 @@ div.add {
     font-size: clamp(13px, 2.5vw, 30px);
     
 }
-form.add-exercise input[type="submit"] {
+form.add-workout input[type="submit"] {
     height: 100%;
     width: 100%;
     background-color: rgba(0, 0, 0, 0);
@@ -90,7 +95,7 @@ form.add-exercise input[type="submit"] {
     font-size: clamp(35px, 7vw, 80px);
     padding: 0px;
 }
-form.add-exercise input[type="submit"]:hover {
+form.add-workout input[type="submit"]:hover {
     cursor: pointer;
 }
 div.add label{
