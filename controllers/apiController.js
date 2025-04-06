@@ -23,6 +23,13 @@ const getUserById = (req, res) => {
     .catch(err => res.status(404).send({error: err.message}));
 }
 
+const getPublicUserDataById = (req, res) => {
+    const {user_id} = req.body;
+    db.getPublicUserDataById(user_id)
+    .then(publicUserData => res.json(publicUserData))
+    .catch(err => res.status(404).send({error: err.message}));
+}
+
 const login = (req, res) => {
     const {name, password} = req.body;
     
@@ -147,5 +154,6 @@ module.exports = {
     createWorkout,
     getExercisesList,
     verifyAuthToken,
-    getChallengeDataByUserId
+    getChallengeDataByUserId,
+    getPublicUserDataById
 }

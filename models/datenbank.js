@@ -59,6 +59,20 @@ class Datenbank {
             throw error;
         }
     } 
+
+    async getPublicUserDataById(id) {
+        try {
+            const sql = 'select id, user_name, profile_picture from users where id = ?';
+            const [rows] = await this.pool.execute(sql, [id]);
+
+            if(rows.length === 0) return new Error('User not found');
+
+            return rows[0];
+        }
+        catch(error) {
+            throw error;
+        }
+    }
     
     async createAccount(user) {
         try {

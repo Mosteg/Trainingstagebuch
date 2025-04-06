@@ -33,8 +33,19 @@ class Loader {
         .catch(err => console.error(err));
     }
 
-    refreshData() {
-        
+    loadPublicUserData(id) {
+        const url = '/api/getPublicUserDataById';
+        return fetch(url, {
+            method: 'post',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                user_id: id
+            })
+        })
+        .then(response => response.json())
+        .catch(err => console.error(err));
     }
 }
 

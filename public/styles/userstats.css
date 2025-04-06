@@ -15,12 +15,12 @@ div.profile {
     margin: 10px 0px;
 }
 div.profile div.image-container {
+
     overflow: hidden;
     height: 5vw;
     width: 5vw;
     height: clamp(20px, 5vw, 100px);
     width: clamp(20px, 5vw, 100px);
-
     border-radius: 100px;
     margin: 0px auto;
 }

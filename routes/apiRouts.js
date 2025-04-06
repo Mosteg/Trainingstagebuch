@@ -8,6 +8,8 @@ router.post('/login', apiController.login);
 router.post('/logout', apiController.logout);
 router.post('/checkAuthStatus', apiController.verifyAuthToken, apiController.checkAuthStatus);
 router.get('/getUserById', apiController.verifyAuthToken, apiController.getUserById);
+router.post('/getPublicUserDataById', apiController.getPublicUserDataById);
+
 
 router.get('/getWorkoutsByUserId', apiController.verifyAuthToken, apiController.getWorkoutsByUserId);
 router.post('/createWorkout', apiController.verifyAuthToken, apiController.createWorkout);
