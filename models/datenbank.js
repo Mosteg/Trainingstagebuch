@@ -128,19 +128,24 @@ class Datenbank {
 
         try {
             const sql = 
-                'select \'exercise Ids:\'  as id, exercise1_id as exercise1, exercise2_id as exercise2, exercise3_id as exercise3 from challenges c ' +
-                'inner join users u on u.challenge_id = c.id ' +
-                'where u.id = ? ' +
-                'union ' +
-                'select u.id, sum(CASE WHEN exercise_id = c.exercise1_id THEN repetitions END), sum(CASE WHEN exercise_id = c.exercise2_id THEN repetitions END), sum(CASE WHEN exercise_id = c.exercise3_id THEN repetitions END) ' +
-                'from users u ' +
-                'inner join challenges c on u.challenge_id = c.id ' +
-                'inner join workouts w on u.id = w.user_id ' +
-                'inner join workout_exercises we on w.id = we.workout_id ' +
-                'where u.challenge_id = (select challenge_id from users where id = ?) ' +
-                'and we.exercise_id in (c.exercise1_id, c.exercise2_id, c.exercise3_id) ' +
-                sqlSnippet +
-                'group by u.id;';
+                'SELECT \'exercise Ids:\' AS id, c.exercise1_id AS exercise1, c.exercise2_id AS exercise2, c.exercise3_id AS exercise3 ' +
+                'FROM challenges c ' +
+                'INNER JOIN users u ON u.challenge_id = c.id ' +
+                'WHERE u.id = ? ' +
+
+                'UNION ' +
+
+                'SELECT ' + 
+                    'u.id, ' +
+                    'IFNULL(SUM(CASE WHEN we.exercise_id = c.exercise1_id THEN we.repetitions ELSE 0 END), 0) AS exercise1_reps, ' +
+                    'IFNULL(SUM(CASE WHEN we.exercise_id = c.exercise2_id THEN we.repetitions ELSE 0 END), 0) AS exercise2_reps, ' +
+                    'IFNULL(SUM(CASE WHEN we.exercise_id = c.exercise3_id THEN we.repetitions ELSE 0 END), 0) AS exercise3_reps ' +
+                'FROM users u ' +
+                'INNER JOIN challenges c ON u.challenge_id = c.id ' +
+                'LEFT JOIN workouts w ON u.id = w.user_id ' + sqlSnippet +
+                'LEFT JOIN workout_exercises we ON w.id = we.workout_id AND we.exercise_id IN (c.exercise1_id, c.exercise2_id, c.exercise3_id) ' +
+                'WHERE u.challenge_id = (SELECT challenge_id FROM users WHERE id = ?) ' +
+                'GROUP BY u.id;';
             return (await this.pool.query(sql, [id, id]))[0];
         }
         catch(error) {

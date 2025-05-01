@@ -15,7 +15,7 @@ class Render {
             for(let i = 1; i <= anzTeilnehmer; i++) {
                 users.push(await loader.loadPublicUserData(workouts[i].id));
             }
-            console.log(users, exercises, workouts);
+            console.log(workouts, users);
         
 
             const userStats = document.querySelector('section.userStats');
@@ -34,7 +34,7 @@ class Render {
             
             for(let i = 1; i <= anzTeilnehmer; i++) {
                 const data = {
-                    user_id: workouts[i].id,
+                    user: users[i - 1],
                     exercise1: workouts[i].exercise1,
                     exercise2: workouts[i].exercise2,
                     exercise3: workouts[i].exercise3,
@@ -53,7 +53,6 @@ class Render {
                     </form>
                 </div>`;
             userStats.innerHTML += addExercise;
-
 
             //gewinner ermitlung
             if(anzTeilnehmer > 1) {
@@ -136,13 +135,20 @@ class Render {
 
 
     #createUserFild(data) {
+        const regexDiv = /<div\b[^>]*>[\s\S]*?<\/div>/i;
+        let profilePicture;
+
+        if(regexDiv.test(data.user.profile_picture)) profilePicture = data.user.profile_picture;
+        else profilePicture = `<img src="${data.user.profile_picture}" alt="">`;
+
+
         const userFild =
-        `<div class="user losing" id="user_id:${data.user_id}">
+        `<div class="user losing" id="user_id:${data.user.id}">
             <div class="profile">
                 <div class="image-container winning">
-                    <div class="defaultProvilePicture">JD</div>
+                    ${profilePicture}
                 </div>
-                <p>${data.user_id}</p>
+                <p>${data.user.user_name}</p>
             </div>
             <div class="stats">
                 <p>${data.exercise1}</p>

@@ -14,10 +14,10 @@ main {
     box-sizing: border-box;
 }
 
-.defaultProvilePicture {
+.defaultProfilePicture {
     width: 100%;
     height: 100%;
-    background-color: #4f46e5;
+    /* background-color: #4f46e5; */
     color: white;
     font-size: clamp(7px, 1.8vw, 50px);
     font-weight: bold;
@@ -25,6 +25,6 @@ main {
     display: flex;
     align-items: center;
     justify-content: center;
-    text-transform: uppercase;
+    /* text-transform: uppercase; */
     user-select: none;   
 }

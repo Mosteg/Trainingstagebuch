@@ -66,12 +66,24 @@ class UserAuth {
                 if(!(e.target[4].value === e.target[5].value)) return this.#showError('Passwörter stimmen nicht überein', 'register');
                 if(!this.#isEmail(e.target[3].value)) return this.#showError('Email ist nicht gültig', 'register');
     
+                //devault profile picture erstellen 
+                const colors = [
+                    'red', 'blue', 'green', 'purple', 'orange',
+                    'brown', 'gray', 'teal', 'navy', 'maroon',
+                    'olive', 'darkgreen', 'darkblue', 'darkred', 'chocolate'
+                ];
+                const randomIndex = Math.floor(Math.random() * colors.length);
+                const color = colors[randomIndex];
+                const profilePictureText = e.target[2].value.slice(0,2)
+                const profilePicture = `<div style="background-color:${color};" class="defaultProfilePicture">${profilePictureText}</div>`;
+
                 const user = {
                     first_name: e.target[0].value,
                     last_name: e.target[1].value,
                     user_name: e.target[2].value,
                     email: e.target[3].value,
-                    password: e.target[4].value
+                    password: e.target[4].value,
+                    profile_picture: profilePicture
                 };
                 
                 fetch('/api/createAccount', {
