@@ -1,5 +1,5 @@
 const Datenbank = require('../models/datenbank');
-const Workout = require('../public/objects/workout');
+const Workout = require('../src/server/workout');
 const jwt = require('jsonwebtoken');
 
 const db = new Datenbank();
@@ -78,13 +78,13 @@ const verifyAuthToken = (req, res, next) => {
 }
 
 const createAuthToken = (user, res) => {
-    const token = jwt.sign({user_id: user.id}, process.env.JWT_SECRET, {expiresIn: '0.1h'})
+    const token = jwt.sign({user_id: user.id}, process.env.JWT_SECRET, {expiresIn: '14d'})
 
     res.cookie('authToken', token, {
         httpOnly: true,
         secure: true,
         sameSite: 'strict',
-        maxAge: 600000
+        maxAge: 14 * 24 * 60 * 60 * 1000
     });
 
     return res;

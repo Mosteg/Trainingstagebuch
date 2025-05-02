@@ -1,91 +1,13 @@
 <%- include('./partials/head.ejs') %>
 
-<body>
+<body data-page="Startseite">
     <%- include('./partials/header.ejs') %>
     <%- include('./partials/userAuth.ejs') %>
 
     <main>
-        <section class="userStats">
-            <!-- header für workout symbole
-            <div class="user ">
-                <div class="profile"></div>
-                <div class="stats">
-                    <div class="image-container"><img src="/data/Icon-pushup.jpg" alt=""></div>
-                    <div class="image-container"><img src="/data/Icon-upllup.jpg" alt=""></div>
-                    <div class="image-container"><img src="/data/Icon-situp.jpg" alt=""></div>
-                </div>
-            </div>
-
-            hier werden die User hinzugefügt
-            <div id="userDisplay">
-                <div class="user winning">
-                    <div class="profile">
-                        <div class="image-container winning">
-                            <img src="data/WIN_20250118_11_30_15_Pro.jpg" alt="">
-                        </div>
-                        <p>Name</p>
-                    </div>
-                    <div class="stats">
-                        <p>0</p>
-                        <p>0</p>
-                        <p>0</p>
-                    </div>
-                </div>
-
-                <div class="user losing">
-                    <div class="profile">
-                        <div class="image-container losing">
-                            <img src="data/WIN_20250118_11_30_15_Pro.jpg" alt="">
-                        </div>
-                        <p>Name</p>
-                    </div>
-                    <div class="stats">
-                        <p>0</p>
-                        <p>0</p>
-                        <p>0</p>
-                    </div>
-                </div>
-            </div>
-            
-            
-            <div class="add-workout">
-                <form class="add-workout">
-                    <div class="add"><label for="22">Push-Ups:</label><input type="number" placeholder="Push-Ups" id="22" name="Push-Ups"></div>
-                    <div class="add"><label for="23">Pull-Ups:</label><input type="number" placeholder="Pull-Ups" id="23" name="Pull-Ups"></div>
-                    <div class="add"><label for="27">Sit-Ups:</label><input type="number" placeholder="Sit-Ups" id="27" name="Sit-Ups"></div>
-                    <input type="submit" value="+">
-                </form>
-            </div> -->
-        </section>
-            
-        
-
-        <section class="statistic">
-            <div class="auswahl">
-                <span>Einzelne Übung</span>
-                <span>Jede Übung</span>
-                <span>Custom</span>
-            </div>
-            <div class="container">
-                <div class="auswahl">
-                    <div class="zeitraum">
-                        <span class="selected">Woche</span>
-                        <span>Monat</span>
-                        <span>Max</span>
-                    </div>
-                    <div class="exercise">
-                        <input type="checkbox" id="pushup2"><label for="pushup2">Push-Ups</label><br>
-                        <input type="checkbox" id="pullup2"><label for="pullup2">Push-Ups</label><br>
-                        <input type="checkbox" id="situp2"><label for="situp2">Push-Ups</label><br>
-                    </div>
-                </div>
-                
-                <div class="statistic">
-                <canvas class="statistic"></canvas>
-
-                </div>
-            </div>
-        </section>
+        <h1>Startseite</h1>
+        <a href="challenge">Challenge</a>
+       
     </main>
 
 

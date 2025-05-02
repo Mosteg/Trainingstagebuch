@@ -44,6 +44,6 @@ module.exports = {
             chunkFilename: '[id].css',
         }),
     ],
-    target: 'node',
+    target: 'web',
     
 };

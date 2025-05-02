@@ -14,9 +14,7 @@ class Render {
             let users = [];
             for(let i = 1; i <= anzTeilnehmer; i++) {
                 users.push(await loader.loadPublicUserData(workouts[i].id));
-            }
-            console.log(workouts, users);
-        
+            }        
 
             const userStats = document.querySelector('section.userStats');
             userStats.innerHTML = '';

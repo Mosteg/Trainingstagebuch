@@ -20,7 +20,7 @@ const initHeader = () => {
 
     userSelections[0].addEventListener('click', e => userAuth.logout());
     userSelections[1].addEventListener('click', e => window.open('einstellungen.html', '_self'));
-    heading.addEventListener('click', e => window.open('index.html', '_self'));
+    heading.addEventListener('click', e => window.open('/', '_self'));
 }
 
 initHeader();
