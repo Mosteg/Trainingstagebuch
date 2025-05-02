@@ -1,14 +1,177 @@
 <%- include('./partials/head.ejs') %>
 
 <body data-page="Challenge">
-    <link rel="stylesheet" href="/styles/userstats.css">
+    <link rel="stylesheet" href="/styles/challenge/userstats.css">
+    <link rel="stylesheet" href="/styles/challenge/sidebar.css">
+    <link rel="stylesheet" href="/styles/challenge/createChallenge.css">
+
+
     <%- include('./partials/header.ejs') %>
     <%- include('./partials/userAuth.ejs') %>
 
     <main>
+        <aside class="sidebar hidden">
+            <div class="back">
+                <a href="/"><i class="fa-solid fa-arrow-left"></i> Startseite</a>
+            </div>
+            <div class="intervals">
+                <p>Zeitraum:</p>
+                <ul>
+                    <li><button interval="thisWeek" class="selected">Diese Woche</button></li>
+                    <li><button interval="week">Letzte Woche</button></li>
+                    <li><button interval="month">Letzter Monat</button></li>
+                    <li><button interval="year">Letztes Jahr</button></li>
+                    <li><button interval="start">Seit Start</button></li>
+                    <li><button interval="every">Alle</button></li>
+                </ul>
+            </div>
+        </aside>
+
+        <section class="createChallenge hidden">
+            <div class="container">
+                <!-- Linke Seite -->
+                <div class="leftt">
+                  <form id="challengeForm">
+                    <label>Übung 1:
+                      <div class="dropdown">
+                        <input type="text" placeholder="Suche Übung..." class="exerciseSearch" data-target="1">
+                        <div class="dropdown-list" id="list1"></div>
+                      </div>
+                    </label><br><br>
+              
+                    <label>Übung 2:
+                      <div class="dropdown">
+                        <input type="text" placeholder="Suche Übung..." class="exerciseSearch" data-target="2">
+                        <div class="dropdown-list" id="list2"></div>
+                      </div>
+                    </label><br><br>
+              
+                    <label>Übung 3:
+                      <div class="dropdown">
+                        <input type="text" placeholder="Suche Übung..." class="exerciseSearch" data-target="3">
+                        <div class="dropdown-list" id="list3"></div>
+                      </div>
+                    </label><br><br>
+              
+                    <button type="button" id="createChallenge">Challenge erstellen</button>
+                  </form>
+                </div>
+              
+                <!-- Rechte Seite -->
+                <div class="rightt">
+                  <h3>Neue Übung erstellen</h3>
+                  <input type="text" id="newExerciseName" placeholder="Name der Übung"><br><br>
+                  <textarea id="newExerciseDesc" placeholder="Beschreibung der Übung"></textarea><br><br>
+                  <button type="button" id="addExercise">Übung hinzufügen</button>
+                </div>
+              </div>
+              
+              <hr>
+              
+              <h3>Teilnehmer hinzufügen</h3>
+              <div class="participant-section">
+                <input type="text" id="usernameInput" placeholder="Nutzername">
+                <button type="button" id="addUser">Hinzufügen</button>
+              </div>
+              
+              <div id="userList"></div>
+              
+              
+              <script>
+                let exercises = [
+                  "Liegestütze", "Kniebeugen", "Burpees",
+                  "Plank", "Ausfallschritte", "Jumping Jacks",
+                  "Mountain Climbers", "Crunches", "High Knees"
+                ];
+              
+                function updateDropdownList(input, listId) {
+                  const list = document.getElementById(listId);
+                  const filter = input.value.toLowerCase();
+                  list.innerHTML = '';
+                  exercises.filter(ex => ex.toLowerCase().includes(filter))
+                           .forEach(ex => {
+                              const item = document.createElement('div');
+                              item.textContent = ex;
+                              item.classList.add('dropdown-item');
+                              item.addEventListener('click', () => {
+                                input.value = ex;
+                                list.innerHTML = '';
+                              });
+                              list.appendChild(item);
+                           });
+                }
+              
+                document.querySelectorAll('.exerciseSearch').forEach(input => {
+                  input.addEventListener('input', () => {
+                    const targetId = 'list' + input.dataset.target;
+                    updateDropdownList(input, targetId);
+                  });
+                  input.addEventListener('focus', () => {
+                    const targetId = 'list' + input.dataset.target;
+                    updateDropdownList(input, targetId);
+                  });
+                  document.addEventListener('click', (e) => {
+                    if (!input.parentElement.contains(e.target)) {
+                      document.getElementById('list' + input.dataset.target).innerHTML = '';
+                    }
+                  });
+                });
+              
+                document.getElementById('addExercise').addEventListener('click', () => {
+                  const name = document.getElementById('newExerciseName').value.trim();
+                  const desc = document.getElementById('newExerciseDesc').value.trim();
+                  if (name === '' || desc === '') {
+                    alert('Bitte Name und Beschreibung eingeben.');
+                    return;
+                  }
+                  exercises.push(name);
+                  alert(`Übung "${name}" hinzugefügt!`);
+                  document.getElementById('newExerciseName').value = '';
+                  document.getElementById('newExerciseDesc').value = '';
+                });
+              
+                document.getElementById('createChallenge').addEventListener('click', function() {
+                  const ex1 = document.querySelector('.exerciseSearch[data-target="1"]').value;
+                  const ex2 = document.querySelector('.exerciseSearch[data-target="2"]').value;
+                  const ex3 = document.querySelector('.exerciseSearch[data-target="3"]').value;
+                  alert(`Challenge erstellt mit:\n1. ${ex1}\n2. ${ex2}\n3. ${ex3}`);
+                });
+              
+                document.getElementById('addUser').addEventListener('click', function() {
+                  const usernameInput = document.getElementById('usernameInput');
+                  const username = usernameInput.value.trim();
+                  if (username === '') {
+                    alert('Bitte einen Nutzernamen eingeben!');
+                    return;
+                  }
+              
+                  const userDiv = document.createElement('div');
+                  const nameSpan = document.createElement('span');
+                  nameSpan.textContent = username;
+              
+                  const deleteButton = document.createElement('button');
+                  deleteButton.textContent = 'Löschen';
+                  deleteButton.addEventListener('click', function() {
+                    userDiv.remove();
+                  });
+              
+                  userDiv.appendChild(nameSpan);
+                  userDiv.appendChild(deleteButton);
+                  userDiv.classList.add('user');
+                  document.getElementById('userList').appendChild(userDiv);
+              
+                  usernameInput.value = '';
+                });
+              </script>
+              
+              
+        </section>
+
+
         <section class="userStats">
             <!-- hier wird autmatisch der content geladen und eingefügt -->
         </section>
+
     </main>
 
 

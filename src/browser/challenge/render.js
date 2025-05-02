@@ -9,16 +9,21 @@ class Render {
     async renderStatistic() {
         try {
             const workouts = await loader.loadChallenge();
+            if(workouts[0] === undefined) return Promise.reject('keine Challenge');
             const anzTeilnehmer = workouts.length -1;
             const exercises = await loader.loadExercises();
+
             let users = [];
             for(let i = 1; i <= anzTeilnehmer; i++) {
                 users.push(await loader.loadPublicUserData(workouts[i].id));
             }        
 
+            const sidebar = document.querySelector('aside.sidebar');
+            sidebar.classList.remove('hidden');
+
             const userStats = document.querySelector('section.userStats');
             userStats.innerHTML = '';
-
+            
             const exerciseOverview = 
                 `<div class="user ">
                     <div class="profile"></div>
@@ -40,13 +45,18 @@ class Render {
                 const userStat = this.#createUserFild(data);
                 userStats.innerHTML += userStat;
             }
-            
+
+            const exerciseNames = [
+                (exercises.find(exercise => exercise.id == workouts[0].exercise1)).name, 
+                (exercises.find(exercise => exercise.id == workouts[0].exercise2)).name, 
+                (exercises.find(exercise => exercise.id == workouts[0].exercise3)).name
+            ]
             const addExercise = 
             `<div class="add-workout">
                     <form class="add-workout">
-                        <div class="add"><label for="22">Push-Ups:</label><input type="number" placeholder="Push-Ups" id="22" name="Push-Ups"></div>
-                        <div class="add"><label for="23">Pull-Ups:</label><input type="number" placeholder="Pull-Ups" id="23" name="Pull-Ups"></div>
-                        <div class="add"><label for="27">Sit-Ups:</label><input type="number" placeholder="Sit-Ups" id="27" name="Sit-Ups"></div>
+                        <div class="add"><label for="${workouts[0].exercise1}">${exerciseNames[0]}:</label><input type="number" placeholder="${exerciseNames[0]}" id="${workouts[0].exercise1}" name="${exerciseNames[0]}"></div>
+                        <div class="add"><label for="${workouts[0].exercise2}">${exerciseNames[1]}:</label><input type="number" placeholder="${exerciseNames[1]}" id="${workouts[0].exercise2}" name="${exerciseNames[1]}"></div>
+                        <div class="add"><label for="${workouts[0].exercise3}">${exerciseNames[2]}:</label><input type="number" placeholder="${exerciseNames[2]}" id="${workouts[0].exercise3}" name="${exerciseNames[2]}"></div>
                         <input type="submit" value="+">
                     </form>
                 </div>`;

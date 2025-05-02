@@ -7,15 +7,12 @@ init().then(() => main());
 async function init() {
     await userAuth.authenticate();
 
-    console.log(document.body.dataset.page);
     switch(document.body.dataset.page) {
         case 'Startseite': 
             break;
 
         case 'Challenge': 
-            const {default: Render} = await import('./render');
-            const render = new Render();
-            await render.renderStatistic();
+            await import('./challenge/challengeMain');
             break;
 
         case '404':
@@ -25,7 +22,7 @@ async function init() {
 
 
 function main() {
-    console.log('main');
+    
     
 
 

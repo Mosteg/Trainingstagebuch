@@ -1,0 +1,122 @@
+aside.sidebar {
+    position: absolute;
+    top: 200px;
+    left: 0;
+    width: 13%;
+
+    padding: 20px;
+    box-sizing: border-box;
+    height: calc(100% - 200px);
+    z-index: 9;
+    text-align: center;
+
+    
+
+}
+aside.sidebar.hidden {
+    visibility: hidden;
+    position: fixed;
+}
+
+aside.sidebar .back {
+    margin-bottom: 20px;
+    font-size: clamp(15px, 2vw, 30px);
+}
+aside.sidebar .back a {
+    text-decoration: none;
+    color: #333;
+    display: flex;
+    align-items: center;
+}
+aside.sidebar .back i {
+    margin-right: 5px;
+}
+
+
+aside.sidebar .intervals p {
+    text-align: left;
+    margin: 0 0 10px 0;
+    font-weight: bold;
+    font-size: clamp(15px, 2.2vw, 35px);
+}
+
+aside.sidebar ul {
+    max-width: 160px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+aside.sidebar li {
+    margin-bottom: 10px;
+}
+
+aside.sidebar button {
+    width: 100%;
+    padding: 5px;
+    font-size: clamp(9px, 1.5vw, 20px);
+    background-color: #e0e0e0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+aside.sidebar button:hover {
+    background-color: #d0d0d0;
+}
+
+aside.sidebar button.selected {
+    background-color: darkgray;
+}
+
+@media (min-width: 1100px) {
+    aside.sidebar button {
+        font-size: clamp(13px, 1.2vw, 20px);
+    }
+}
+
+
+@media (max-width: 1100px) {
+    aside.sidebar {
+        position: static;
+        width: auto;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        margin-bottom: 20px;
+        padding: 10px 0;
+        border-bottom: 1px solid #ddd;
+    }
+    aside.sidebar .back {
+        margin: 10px 0 10px 0;
+        text-align: center;
+    }
+
+    aside.sidebar .intervals ul {
+        display: inline;
+        width: 100%;
+
+        
+    }
+    aside.sidebar li {
+        width: 15%;
+        float: left;
+        margin: auto;
+        margin: 0px 0.83%;
+    }
+    aside.sidebar button {
+        width: 100%;
+    }
+}
+
+@media (max-width: 600px) {
+    aside.sidebar li {
+        width: 30%;
+        margin: 5px 1.66%;
+    }
+
+    aside.sidebar button {
+        font-size: clamp(9px, 2.5vw, 25px)
+    }
+}

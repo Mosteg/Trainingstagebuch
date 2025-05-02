@@ -123,7 +123,7 @@ class Datenbank {
             case 'year': sqlSnippet = 'and now() - interval 1 year < w.timestamp '; break;
             case 'start': sqlSnippet = 'and c.created_at < w.timestamp '; break;
             case 'every': sqlSnippet = ''; break;
-            default: sqlSnippet = 'and now() - interval 7 day < w.timestamp '; break;
+            default: sqlSnippet = 'and YEARWEEK(w.timestamp, 1) = YEARWEEK(CURDATE(), 1) '; break;
         }
 
         try {
